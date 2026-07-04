@@ -10,3 +10,52 @@
 6. The system should handle payments and process transactions between passengers and drivers.
 7. The system should provide real-time tracking of ongoing rides and notify passengers and drivers about ride status updates.
 8. The system should handle concurrent requests and ensure data consistency.
+
+---
+
+### Core Entities
+
+1. Ride:
+    - id
+    - passenger
+    - driver
+    - status (CREATED, DRIVER_ASSIGNED, PICKED_UP, CANCELLED, COMPLETED)
+    - fare
+    - created_time
+    - scheduled_at
+    - pickup_location (LAT, LONG)
+    - drop_location (LAT, LONG)
+    - tips
+    - payment
+
+2. Passenger
+    - id
+    - name
+    - phone
+    - upi_id
+
+3. Driver
+    - id
+    - vehicle 
+    - status (OFFLINE, IDLE, ON_DUTY)
+    - avg_rating
+    - upi_id
+
+4. Vehicle
+    - id
+    - reg_number
+    - type (CAR, BIKE, AUTO, SCOOTY)
+    - model (SEDAN, SWIFT, ACTIVA, PULSAR)
+
+5. RideRequest
+    - id
+    - ride
+    - driver
+    - response (ACCEPTED, DENIED)
+    - created_time
+
+6. Payment
+    - id
+    - type (UPI, CASH)
+    - ride
+    
