@@ -60,6 +60,16 @@ public class RideServiceImpl implements RideService {
     }
 
     @Override
+    public void cancelRide(Long rideId, Long passengerId) {
+
+        Ride ride = getRideById(rideId);
+
+        ride.onCancel(passengerId);
+
+        rideRepository.save(ride);
+    }
+
+    @Override
     public Ride getRideById(Long rideId) {
 
         return rideRepository.findById(rideId).orElseThrow(() -> new RideNotFoundException(rideId));

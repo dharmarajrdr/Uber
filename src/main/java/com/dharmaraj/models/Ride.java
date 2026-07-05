@@ -2,9 +2,11 @@ package com.dharmaraj.models;
 
 import java.util.List;
 
+import com.dharmaraj.enums.DriverStatus;
 import com.dharmaraj.enums.RideStatus;
 import com.dharmaraj.exceptions.DriverNotAssignedToRideException;
 import com.dharmaraj.exceptions.InvalidDriverForRideException;
+import com.dharmaraj.exceptions.UnauthorizedPassengerForRideCancellationException;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -56,5 +58,20 @@ public class Ride extends DateTimeAudit {
         status.onStart(getId(), getDriver().getId());
 
         this.setStatus(RideStatus.IN_PROGRESS);
+    }
+
+    public void onCancel(Long passengerId) {
+
+        if (this.getPassenger().getId() != passengerId) {
+            throw new UnauthorizedPassengerForRideCancellationException();
+        }
+
+        status.onCancel(getId(), passengerId);
+
+        if (driver != null) {
+            driver.setStatus(DriverStatus.IDLE);
+        }
+
+        this.setStatus(RideStatus.CANCELLED);
     }
 }
