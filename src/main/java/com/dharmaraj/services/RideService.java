@@ -9,4 +9,6 @@ public interface RideService {
     Ride createRide(Long passengerId, Location source, Location destination, VehicleType vehicleType);
 
     Ride getRideById(Long rideId);
+
+    void startRide(Long rideId, Long driverId, String otp);
 }

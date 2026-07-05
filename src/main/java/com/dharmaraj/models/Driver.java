@@ -25,4 +25,11 @@ public class Driver extends DateTimeAudit {
 
     @Column(nullable = false, unique = true)
     private String upiId;
+
+    public void onStartRide(Long rideId) {
+
+        status.onStartRide(rideId, this.getId());
+
+        this.setStatus(DriverStatus.ON_DUTY);
+    }
 }

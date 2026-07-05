@@ -3,6 +3,8 @@ package com.dharmaraj.models;
 import java.util.List;
 
 import com.dharmaraj.enums.RideStatus;
+import com.dharmaraj.exceptions.DriverNotAssignedToRideException;
+import com.dharmaraj.exceptions.InvalidDriverForRideException;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -41,4 +43,18 @@ public class Ride extends DateTimeAudit {
     private Payment payment;
 
     private List<RideRequest> rideRequests;
+
+    public void onStart() {
+
+        if (driver == null) {
+            throw new DriverNotAssignedToRideException(this.getId());
+        }
+        if (!driver.getId().equals(driver.getId())) {
+            throw new InvalidDriverForRideException(driver.getId(), this.getId());
+        }
+
+        status.onStart(getId(), getDriver().getId());
+
+        this.setStatus(RideStatus.IN_PROGRESS);
+    }
 }

@@ -13,4 +13,8 @@ public class Constants {
             VehicleType.BIKE, 30.0,
             VehicleType.SCOOTY, 20.0,
             VehicleType.AUTO, 40.0);
+
+    public static final int RIDE_START_OTP_TTL_SECONDS = 30;
+
+    public static final int RIDE_START_OTP_LENGTH = 6;
 }

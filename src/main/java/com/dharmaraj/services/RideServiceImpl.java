@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.dharmaraj.enums.VehicleType;
 import com.dharmaraj.exceptions.RideNotFoundException;
 import com.dharmaraj.exceptions.SameDestinationNotAllowedException;
+import com.dharmaraj.models.Driver;
 import com.dharmaraj.models.Location;
 import com.dharmaraj.models.Passenger;
 import com.dharmaraj.models.Ride;
@@ -16,6 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RideServiceImpl implements RideService {
 
+    private final OtpService otpService;
     private final RideRepository rideRepository;
     private final PassengerService passengerService;
     private final FareEstimateService fareEstimateService;
@@ -39,6 +41,22 @@ public class RideServiceImpl implements RideService {
         rideRepository.save(ride);
         driverAssignmentService.rideCreated(ride.getId());
         return ride;
+    }
+
+    @Override
+    public void startRide(Long rideId, Long driverId, String otp) {
+
+        Ride ride = getRideById(rideId);
+        ride.onStart();
+
+        Driver driver = ride.getDriver();
+        driver.onStartRide(rideId);
+
+        otpService.validate(ride.getPassenger().getId(), otp);
+
+        ride.setDriver(driver);
+
+        rideRepository.save(ride);
     }
 
     @Override
