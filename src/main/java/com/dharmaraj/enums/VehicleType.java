@@ -2,5 +2,5 @@ package com.dharmaraj.enums;
 
 public enum VehicleType {
 
-    BIKE, CAR, SCOOTER, AUTO
+    BIKE, CAR, SCOOTY, AUTO
 }

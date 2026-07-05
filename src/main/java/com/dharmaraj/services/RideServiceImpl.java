@@ -1,0 +1,50 @@
+package com.dharmaraj.services;
+
+import org.springframework.stereotype.Service;
+
+import com.dharmaraj.enums.VehicleType;
+import com.dharmaraj.exceptions.RideNotFoundException;
+import com.dharmaraj.exceptions.SameDestinationNotAllowedException;
+import com.dharmaraj.models.Location;
+import com.dharmaraj.models.Passenger;
+import com.dharmaraj.models.Ride;
+import com.dharmaraj.repository.RideRepository;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
+public class RideServiceImpl implements RideService {
+
+    private final RideRepository rideRepository;
+    private final PassengerService passengerService;
+    private final FareEstimateService fareEstimateService;
+    private final DriverAssignmentService driverAssignmentService;
+
+    @Override
+    public Ride createRide(Long passengerId, Location source, Location destination, VehicleType vehicleType) {
+
+        if (source.isEqual(destination)) {
+            throw new SameDestinationNotAllowedException();
+        }
+
+        Passenger passenger = passengerService.getPassengerById(passengerId);
+        Double fare = fareEstimateService.estimateFare(source, destination, vehicleType);
+
+        Ride ride = new Ride();
+        ride.setPassenger(passenger);
+        ride.setPickupLocation(source);
+        ride.setDropoffLocation(destination);
+        ride.setFare(fare);
+        rideRepository.save(ride);
+        driverAssignmentService.rideCreated(ride.getId());
+        return ride;
+    }
+
+    @Override
+    public Ride getRideById(Long rideId) {
+
+        return rideRepository.findById(rideId).orElseThrow(() -> new RideNotFoundException(rideId));
+    }
+
+}

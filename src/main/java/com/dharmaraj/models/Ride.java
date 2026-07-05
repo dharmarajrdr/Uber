@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,9 +25,9 @@ public class Ride extends DateTimeAudit {
     private Driver driver;
 
     @Enumerated(EnumType.STRING)
-    private RideStatus status;
+    private RideStatus status = RideStatus.CREATED;
 
-    private Double fare;
+    private Double fare = 0.0;
 
     @Embedded
     private Location pickupLocation;
@@ -34,8 +35,9 @@ public class Ride extends DateTimeAudit {
     @Embedded
     private Location dropoffLocation;
 
-    private Double tips;
+    private Integer tips = 0;
 
+    @OneToOne
     private Payment payment;
 
     private List<RideRequest> rideRequests;
