@@ -2,11 +2,14 @@ package com.dharmaraj.models;
 
 import java.util.List;
 
+import com.dharmaraj.config.Constants;
 import com.dharmaraj.enums.DriverStatus;
 import com.dharmaraj.enums.RideStatus;
 import com.dharmaraj.exceptions.DriverNotAssignedToRideException;
 import com.dharmaraj.exceptions.InvalidDriverForRideException;
+import com.dharmaraj.exceptions.PickupLocationNotReachedException;
 import com.dharmaraj.exceptions.UnauthorizedPassengerForRideCancellationException;
+import com.dharmaraj.services.DistanceCalculator;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -46,12 +49,12 @@ public class Ride extends DateTimeAudit {
 
     private List<RideRequest> rideRequests;
 
-    public void onStart() {
+    public void onStart(Long driverId) {
 
         if (driver == null) {
             throw new DriverNotAssignedToRideException(this.getId());
         }
-        if (!driver.getId().equals(driver.getId())) {
+        if (!driver.getId().equals(driverId)) {
             throw new InvalidDriverForRideException(driver.getId(), this.getId());
         }
 
@@ -73,5 +76,24 @@ public class Ride extends DateTimeAudit {
         }
 
         this.setStatus(RideStatus.CANCELLED);
+    }
+
+    public void onDriverArrival(Long driverId, Location driverLocation) {
+
+        if (driver == null) {
+            throw new DriverNotAssignedToRideException(this.getId());
+        }
+        if (!driver.getId().equals(driverId)) {
+            throw new InvalidDriverForRideException(driver.getId(), this.getId());
+        }
+
+        status.onDriverArrival(getId(), driverId, driverLocation);
+
+        double distanceToPickup = DistanceCalculator.getDistanceInMeters(driverLocation, pickupLocation);
+        if (distanceToPickup > Constants.PICKUP_LOCATION_THRESHOLD_METERS) {
+            throw new PickupLocationNotReachedException(distanceToPickup);
+        }
+
+        this.setStatus(RideStatus.DRIVER_REACHED_PICKUP);
     }
 }

@@ -27,7 +27,7 @@ public class OtpServiceImpl implements OtpService {
     @Override
     public String generate(Long passengerId) {
 
-        String key = String.valueOf(passengerId);
+        String key = Constants.RIDE_OTP_KEY_PREFIX + ":" + String.valueOf(passengerId);
 
         String otp = redisTemplate.opsForValue().get(key);
         if (otp != null) {
@@ -46,7 +46,7 @@ public class OtpServiceImpl implements OtpService {
             throw new InvalidOtpException("OTP cannot be null.");
         }
 
-        String key = String.valueOf(passengerId);
+        String key = Constants.RIDE_OTP_KEY_PREFIX + ":" + String.valueOf(passengerId);
 
         String storedOtp = redisTemplate.opsForValue().get(key);
         if (storedOtp == null) {

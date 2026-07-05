@@ -16,4 +16,18 @@ public class Location {
     public boolean isEqual(Location other) {
         return this.latitude.equals(other.latitude) && this.longitude.equals(other.longitude);
     }
+
+    public String toString() {
+
+        return latitude + "," + longitude;
+    }
+
+    public static Location fromString(String locationString) {
+
+        String[] parts = locationString.split(",");
+        double latitude = Double.parseDouble(parts[0]);
+        double longitude = Double.parseDouble(parts[1]);
+        return new Location(latitude, longitude);
+    }
+
 }

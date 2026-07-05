@@ -47,7 +47,7 @@ public class RideServiceImpl implements RideService {
     public void startRide(Long rideId, Long driverId, String otp) {
 
         Ride ride = getRideById(rideId);
-        ride.onStart();
+        ride.onStart(driverId);
 
         Driver driver = ride.getDriver();
         driver.onStartRide(rideId);
@@ -73,6 +73,14 @@ public class RideServiceImpl implements RideService {
     public Ride getRideById(Long rideId) {
 
         return rideRepository.findById(rideId).orElseThrow(() -> new RideNotFoundException(rideId));
+    }
+
+    @Override
+    public void driverArrivedPickupLocation(Long rideId, Long driverId, Location driverLocation) {
+
+        Ride ride = getRideById(rideId);
+        ride.onDriverArrival(driverId, driverLocation);
+        rideRepository.save(ride);
     }
 
 }
