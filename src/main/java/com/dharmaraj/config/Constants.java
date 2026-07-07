@@ -3,7 +3,6 @@ package com.dharmaraj.config;
 import java.util.Map;
 
 import com.dharmaraj.enums.TimeRange;
-import com.dharmaraj.enums.VehicleType;
 
 public class Constants {
 
@@ -14,12 +13,6 @@ public class Constants {
     public static final String DRIVER_LOCATION_KEY_PREFIX = "driver-location";
 
     public static final int PICKUP_LOCATION_THRESHOLD_METERS = 50;
-
-    public static final Map<VehicleType, Double> FARE_PER_KM = Map.of(
-            VehicleType.CAR, 50.0,
-            VehicleType.BIKE, 30.0,
-            VehicleType.SCOOTY, 20.0,
-            VehicleType.AUTO, 40.0);
 
     public static final Map<TimeRange, Double> SURGE_MULTIPLIER = Map.of(
             TimeRange.EARLY_MORNING, 1.5,

@@ -6,11 +6,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TimeRange {
-    LATE_NIGHT(21, 24),
     EARLY_MORNING(0, 6),
     MORNING_PEAK(6, 10),
     DAY_TIME(10, 16),
-    EVENING_PEAK(16, 21);
+    EVENING_PEAK(16, 21),
+    LATE_NIGHT(21, 24);
 
     private final int startHour;
     private final int endHour;

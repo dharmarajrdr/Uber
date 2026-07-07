@@ -1,5 +1,7 @@
 package com.dharmaraj.models;
 
+import com.dharmaraj.enums.Country;
+
 import lombok.Getter;
 
 @Getter
@@ -15,12 +17,12 @@ public class FareEstimationReport {
 
     private final Double gst;
 
-    public FareEstimationReport(Double farePerKm, Double distance, Double surgeMultiplierBasedOnTime, Location source) {
+    public FareEstimationReport(Double farePerKm, Double distance, Double surgeMultiplierBasedOnTime, Country country) {
 
         this.farePerKm = farePerKm;
         this.distance = distance;
         this.surgeMultiplierBasedOnTime = surgeMultiplierBasedOnTime;
-        this.gst = source.getCountry().getGst();
+        this.gst = country.getGst();
         Double serviceCharge = farePerKm * distance * surgeMultiplierBasedOnTime;
         this.estimatedFare = serviceCharge + (serviceCharge * this.gst);
     }
