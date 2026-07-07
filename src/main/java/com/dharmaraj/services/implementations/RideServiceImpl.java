@@ -6,6 +6,7 @@ import com.dharmaraj.enums.VehicleType;
 import com.dharmaraj.exceptions.RideNotFoundException;
 import com.dharmaraj.exceptions.SameDestinationNotAllowedException;
 import com.dharmaraj.models.Driver;
+import com.dharmaraj.models.FareEstimationReport;
 import com.dharmaraj.models.Location;
 import com.dharmaraj.models.Passenger;
 import com.dharmaraj.models.Ride;
@@ -36,13 +37,14 @@ public class RideServiceImpl implements RideService {
         }
 
         Passenger passenger = passengerService.getPassengerById(passengerId);
-        Double fare = fareEstimateService.estimateFare(source, destination, vehicleType);
+        FareEstimationReport fareEstimationReport = fareEstimateService.estimateFare(source, destination, vehicleType);
+        Double estimatedFare = fareEstimationReport.getEstimatedFare();
 
         Ride ride = new Ride();
         ride.setPassenger(passenger);
         ride.setPickupLocation(source);
         ride.setDropoffLocation(destination);
-        ride.setFare(fare);
+        ride.setFare(estimatedFare);
         rideRepository.save(ride);
         driverAssignmentService.rideCreated(ride.getId());
         return ride;

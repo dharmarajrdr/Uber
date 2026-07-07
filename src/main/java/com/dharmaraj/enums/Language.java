@@ -1,0 +1,37 @@
+package com.dharmaraj.enums;
+
+public enum Language {
+
+    Tamil,
+    English,
+    Malayalam,
+    Telugu,
+    Kannada,
+    Hindi,
+    Portuguese,
+    Japanese,
+    Spanish,
+    French,
+    German,
+    Italian,
+    Russian,
+    Chinese,
+    Arabic,
+    Dutch,
+    Swedish,
+    Norwegian,
+    Danish,
+    Finnish,
+    Polish,
+    Turkish,
+    Greek,
+    Korean,
+    Thai,
+    Vietnamese,
+    Indonesian,
+    Malay,
+    Filipino,
+    Swahili,
+    Zulu,
+    Afrikaans;
+}

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.dharmaraj.enums.VehicleType;
 import com.dharmaraj.factories.FareEstimationFactory;
+import com.dharmaraj.models.FareEstimationReport;
 import com.dharmaraj.models.Location;
 import com.dharmaraj.services.interfaces.FareEstimateService;
 
@@ -16,7 +17,7 @@ public class FareEstimateServiceImpl implements FareEstimateService {
     private final FareEstimationFactory fareEstimationFactory;
 
     @Override
-    public Double estimateFare(Location source, Location destination, VehicleType vehicleType) {
+    public FareEstimationReport estimateFare(Location source, Location destination, VehicleType vehicleType) {
 
         return fareEstimationFactory.getInstance(vehicleType).estimateFare(source, destination);
     }
