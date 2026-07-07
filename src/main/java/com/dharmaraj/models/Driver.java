@@ -30,6 +30,13 @@ public class Driver extends DateTimeAudit {
 
         status.onStartRide(rideId, this.getId());
 
-        this.setStatus(DriverStatus.ON_DUTY);
+        this.setStatus(DriverStatus.IN_RIDE);
+    }
+
+    public void onNewRideRequestAccept(Long rideId) {
+
+        status.onNewRideRequestAccept(rideId, this.getId());
+
+        this.setStatus(DriverStatus.WAY_TO_PICKUP);
     }
 }

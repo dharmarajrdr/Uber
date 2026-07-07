@@ -7,8 +7,10 @@ import com.dharmaraj.config.Constants;
 import com.dharmaraj.enums.DriverStatus;
 import com.dharmaraj.models.Driver;
 import com.dharmaraj.models.Location;
+import com.dharmaraj.models.Ride;
 import com.dharmaraj.repository.DriverRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -63,6 +65,24 @@ public class DriverServiceImpl implements DriverService {
 
         Location driverLocation = getCurrentLocation(driverId);
         rideService.driverArrivedPickupLocation(rideId, driverId, driverLocation);
+    }
+
+    @Override
+    @Transactional
+    public void respondToRideRequest(Long driverId, Long rideId, boolean accept) {
+
+        if (!accept) {
+            return;
+        }
+
+        Driver driver = getDriverById(driverId);
+        driver.onNewRideRequestAccept(rideId);
+
+        Ride ride = rideService.getRideById(rideId);
+        ride.onDriverAcceptRideRequest(driver);
+
+        driverRepository.save(driver);
+        rideService.updateRide(ride);
     }
 
 }

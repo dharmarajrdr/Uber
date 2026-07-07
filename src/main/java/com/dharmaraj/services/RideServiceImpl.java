@@ -83,4 +83,10 @@ public class RideServiceImpl implements RideService {
         rideRepository.save(ride);
     }
 
+    @Override
+    public void updateRide(Ride ride) {
+
+        rideRepository.save(ride);
+    }
+
 }

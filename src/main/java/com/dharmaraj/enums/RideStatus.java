@@ -1,6 +1,7 @@
 package com.dharmaraj.enums;
 
 import com.dharmaraj.exceptions.ArrivalAlreadyInformedException;
+import com.dharmaraj.exceptions.DriverAlreadyAssignedToRideException;
 import com.dharmaraj.exceptions.DriverNotAssignedToRideException;
 import com.dharmaraj.exceptions.DriverNotReachedPickupException;
 import com.dharmaraj.exceptions.RideAlreadyCancelledException;
@@ -60,6 +61,23 @@ public enum RideStatus {
                 throw new ArrivalAlreadyInformedException(rideId, driverId);
             default:
                 break; // No exception for DRIVER_ASSIGNED
+        }
+    }
+
+    public void onDriverAcceptRideRequest(Long id) {
+
+        switch (this) {
+            case COMPLETED:
+                throw new RideAlreadyCompletedException(id);
+            case CANCELLED:
+                throw new RideAlreadyCancelledException(id);
+            case IN_PROGRESS:
+                throw new RideAlreadyStartedException(id);
+            case DRIVER_ASSIGNED:
+            case DRIVER_REACHED_PICKUP:
+                throw new DriverAlreadyAssignedToRideException(id);
+            default:
+                break; // No exception for CREATED
         }
     }
 }

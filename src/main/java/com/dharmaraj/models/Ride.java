@@ -96,4 +96,16 @@ public class Ride extends DateTimeAudit {
 
         this.setStatus(RideStatus.DRIVER_REACHED_PICKUP);
     }
+
+    public void onDriverAcceptRideRequest(Driver driver) {
+
+        if (this.driver == null) {
+            throw new DriverNotAssignedToRideException(this.getId());
+        }
+
+        status.onDriverAcceptRideRequest(this.getId());
+        this.setStatus(RideStatus.DRIVER_ASSIGNED);
+        this.setDriver(driver);
+    }
+
 }

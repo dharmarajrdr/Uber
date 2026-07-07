@@ -15,4 +15,6 @@ public interface RideService {
     void cancelRide(Long rideId, Long passengerId);
 
     void driverArrivedPickupLocation(Long rideId, Long driverId, Location driverLocation);
+
+    void updateRide(Ride ride);
 }

@@ -15,4 +15,6 @@ public interface DriverService {
     Driver getDriverById(Long driverId);
 
     void informArrivalToPassenger(Long driverId, Long rideId);
+
+    void respondToRideRequest(Long driverId, Long rideId, boolean accept);
 }
