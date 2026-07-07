@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.utils;
 
 import com.dharmaraj.models.Location;
 

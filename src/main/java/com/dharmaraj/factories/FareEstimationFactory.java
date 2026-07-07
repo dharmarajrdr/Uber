@@ -1,8 +1,9 @@
-package com.dharmaraj.services;
+package com.dharmaraj.factories;
 
 import org.springframework.stereotype.Service;
 
 import com.dharmaraj.enums.VehicleType;
+import com.dharmaraj.services.interfaces.FareEstimationStrategy;
 import com.dharmaraj.strategies.FareEstimation.AutoFareEstimationStrategy;
 import com.dharmaraj.strategies.FareEstimation.BikeFareEstimationStrategy;
 import com.dharmaraj.strategies.FareEstimation.CarFareEstimationStrategy;

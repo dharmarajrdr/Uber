@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.implementations;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,8 @@ import com.dharmaraj.models.Driver;
 import com.dharmaraj.models.Location;
 import com.dharmaraj.models.Ride;
 import com.dharmaraj.repository.DriverRepository;
+import com.dharmaraj.services.interfaces.DriverService;
+import com.dharmaraj.services.interfaces.RideService;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import com.dharmaraj.config.Constants;
 import com.dharmaraj.enums.VehicleType;
 import com.dharmaraj.models.Location;
-import com.dharmaraj.services.DistanceCalculator;
-import com.dharmaraj.services.FareEstimationStrategy;
+import com.dharmaraj.services.interfaces.FareEstimationStrategy;
+import com.dharmaraj.utils.DistanceCalculator;
 
 @Service
 public class BikeFareEstimationStrategy implements FareEstimationStrategy {

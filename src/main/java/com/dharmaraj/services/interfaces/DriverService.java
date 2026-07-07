@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.interfaces;
 
 import com.dharmaraj.enums.DriverStatus;
 import com.dharmaraj.models.Driver;

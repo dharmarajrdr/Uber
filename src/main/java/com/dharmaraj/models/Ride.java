@@ -9,7 +9,7 @@ import com.dharmaraj.exceptions.DriverNotAssignedToRideException;
 import com.dharmaraj.exceptions.InvalidDriverForRideException;
 import com.dharmaraj.exceptions.PickupLocationNotReachedException;
 import com.dharmaraj.exceptions.UnauthorizedPassengerForRideCancellationException;
-import com.dharmaraj.services.DistanceCalculator;
+import com.dharmaraj.utils.DistanceCalculator;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

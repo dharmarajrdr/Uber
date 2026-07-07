@@ -1,10 +1,11 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.implementations;
 
 import org.springframework.stereotype.Service;
 
 import com.dharmaraj.exceptions.PassengerNotFoundException;
 import com.dharmaraj.models.Passenger;
 import com.dharmaraj.repository.PassengerRepository;
+import com.dharmaraj.services.interfaces.PassengerService;
 
 import lombok.AllArgsConstructor;
 

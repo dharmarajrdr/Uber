@@ -3,7 +3,7 @@ package com.dharmaraj.strategies.DriverAssignment;
 import org.springframework.stereotype.Service;
 
 import com.dharmaraj.models.Ride;
-import com.dharmaraj.services.DriverAssignmentStrategy;
+import com.dharmaraj.services.interfaces.DriverAssignmentStrategy;
 
 @Service
 public class NearestDriverAssignmentStrategy implements DriverAssignmentStrategy {

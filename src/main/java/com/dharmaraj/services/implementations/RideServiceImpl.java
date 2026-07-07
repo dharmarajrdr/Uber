@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.implementations;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +10,11 @@ import com.dharmaraj.models.Location;
 import com.dharmaraj.models.Passenger;
 import com.dharmaraj.models.Ride;
 import com.dharmaraj.repository.RideRepository;
+import com.dharmaraj.services.interfaces.DriverAssignmentService;
+import com.dharmaraj.services.interfaces.FareEstimateService;
+import com.dharmaraj.services.interfaces.OtpService;
+import com.dharmaraj.services.interfaces.PassengerService;
+import com.dharmaraj.services.interfaces.RideService;
 
 import lombok.AllArgsConstructor;
 

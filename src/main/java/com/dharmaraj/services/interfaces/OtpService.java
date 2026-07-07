@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.interfaces;
 
 public interface OtpService {
 

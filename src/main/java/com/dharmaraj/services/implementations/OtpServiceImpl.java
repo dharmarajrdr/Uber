@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.implementations;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dharmaraj.config.Constants;
 import com.dharmaraj.exceptions.InvalidOtpException;
+import com.dharmaraj.services.interfaces.OtpService;
 
 import lombok.AllArgsConstructor;
 

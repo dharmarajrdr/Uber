@@ -1,4 +1,4 @@
-package com.dharmaraj.services;
+package com.dharmaraj.services.interfaces;
 
 import com.dharmaraj.enums.VehicleType;
 import com.dharmaraj.models.Location;
